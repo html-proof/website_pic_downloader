@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Profile Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Instagram Profile Picture Downloader</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            <label for="profileUrl">Enter Instagram Profile URL:</label>
+            <input type="text" name="profileUrl" id="profileUrl" placeholder="https://www.instagram.com/username/">
+            <button type="submit">Download Profile Picture</button>
+        </form>
+
+        {% if success_message %}
+        <p>{{ success_message }}</p>
+        {% endif %}
+
+        {% if profile_picture_url %}
+        <img src="{{ profile_picture_url }}" alt="Profile Picture">
+        <a href="{{ profile_picture_url }}" download>View The  Profile Picture</a>
+        {% endif %}
+    </div>
+    {% if similar_profiles %}
+<div class="similar-profiles">
+    <h2>Similar Profiles</h2>
+    <ul>
+        {% for profile in similar_profiles %}
+        <li><a href="https://www.instagram.com/{{ profile }}" target="_blank">{{ profile }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var messageElement = document.getElementById('message');
+
+            if (messageElement) {
+                // Automatically remove the message after 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                    messageElement.remove();
+                }, 5000);
+            }
+        });
+    </script>
+    <script> 
+        document.addEventListener('contextmenu', event=> event.preventDefault()); 
+        document.onkeydown = function(e) { 
+        if(event.keyCode == 123) { 
+        return false; 
+        } 
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)){ 
+        return false; 
+        } 
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)){ 
+        return false; 
+        } 
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)){ 
+        return false; 
+        } 
+        } 
+        </script> 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const textbox = document.getElementById('textbox');
+    const result = document.getElementById('result');
+
+    textbox.addEventListener('input', function() {
+        const inputValue = textbox.value;
+
+        if (inputValue.trim() === '') {
+            result.textContent = 'Textbox is empty';
+        } else {
+            result.textContent = 'Textbox value: ' + inputValue;
+        }
+    });
+});
+</script>
+</body>
+</html>
